@@ -1,7 +1,7 @@
 [build]
   base = "frontend"
-  command = "npm install && npm run build"
-  publish = "frontend/build"
+  command = "chmod -R 755 node_modules/.bin && npm install && npm run build"
+  publish = "build"
 
 [build.environment]
   NPM_FLAGS = "--legacy-peer-deps"
