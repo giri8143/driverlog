@@ -1,6 +1,6 @@
 # 🚗 Driver Log App — Fleet Management
 
-A full-stack fleet management app with React frontend + Express backend + Oracle DB.
+A full-stack fleet management app with React frontend + Express backend + Mysql
 
 ---
 
