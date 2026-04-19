@@ -1997,7 +1997,7 @@ function AppShell({ user, onLogout, onUserUpdate }) {
     check();
     sessionRef.current = setInterval(check, 60000);
     return () => clearInterval(sessionRef.current);
-  }, []);
+  }, [handleLogout]);
 
   const handleRefreshSession = async () => {
     try {
