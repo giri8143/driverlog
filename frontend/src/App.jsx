@@ -2004,12 +2004,10 @@ function AppShell({ user, onLogout, onUserUpdate }) {
     }
   };
 
-  const handleLogout = () => {
+  const handleLogout = useCallback(() => {
     localStorage.removeItem("token");
-    localStorage.removeItem("user");
-    localStorage.removeItem("tokenExpiry");
-    onLogout();
-  };
+    window.location.reload();
+  }, []);
   useEffect(() => {
     const check = () => {
       if (isTokenExpired()) {
