@@ -1984,21 +1984,6 @@ function AppShell({ user, onLogout, onUserUpdate }) {
     settings: "Settings",
   };
 
-  useEffect(() => {
-    const check = () => {
-      if (isTokenExpired()) {
-        clearInterval(sessionRef.current);
-        handleLogout();
-        return;
-      }
-      const remaining = getTokenExpiry() - Date.now();
-      setShowSessionWarn(remaining < 5 * 60 * 1000 && remaining > 0);
-    };
-    check();
-    sessionRef.current = setInterval(check, 60000);
-    return () => clearInterval(sessionRef.current);
-  }, [handleLogout]);
-
   const handleRefreshSession = async () => {
     try {
       const res = await fetch(`${API_URL}/api/auth/refresh`, {
@@ -2025,6 +2010,20 @@ function AppShell({ user, onLogout, onUserUpdate }) {
     localStorage.removeItem("tokenExpiry");
     onLogout();
   };
+  useEffect(() => {
+    const check = () => {
+      if (isTokenExpired()) {
+        clearInterval(sessionRef.current);
+        handleLogout();
+        return;
+      }
+      const remaining = getTokenExpiry() - Date.now();
+      setShowSessionWarn(remaining < 5 * 60 * 1000 && remaining > 0);
+    };
+    check();
+    sessionRef.current = setInterval(check, 60000);
+    return () => clearInterval(sessionRef.current);
+  }, [handleLogout]);
 
   const renderPage = () => {
     switch (page) {
